@@ -39,7 +39,10 @@ THE SOFTWARE.
 
 #include "I2Cdev.h"
 #include <avr/pgmspace.h>
+#include "helper_3dmath.h"
 
+
+#define MPU6050_INCLUDE_DMP_MOTIONAPPS20
 
 
 #define MPU6050_ADDRESS_AD0_LOW     0x68 // address pin low (GND), default for InvenSense evaluation board
