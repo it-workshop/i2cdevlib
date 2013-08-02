@@ -38,7 +38,10 @@ THE SOFTWARE.
 #include "MPU6050_6Axis_MotionApps20.h"
 
 #include "MPU6050.h"
+
+#ifdef __AVR__
 #include <avr/pgmspace.h>
+#endif
 
 #define MPU6050_DMP_ACCEL_LSB_PER_G 16384   // lsb per g (?)
 #define MPU6050_DMP_ACCEL_G 9.80665

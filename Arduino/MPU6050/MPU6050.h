@@ -40,7 +40,7 @@ THE SOFTWARE.
 #include "I2Cdev.h"
 #include "helper_3dmath.h"
 
-#ifdef _arch_avr_
+#ifdef __AVR__
     #include <avr/pgmspace.h>
 #endif
 

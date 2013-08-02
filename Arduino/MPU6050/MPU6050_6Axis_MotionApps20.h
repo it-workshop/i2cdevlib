@@ -40,7 +40,9 @@ THE SOFTWARE.
 #define MPU6050_INCLUDE_DMP_MOTIONAPPS20
 
 #include "MPU6050.h"
+#ifdef __AVR__
 #include <avr/pgmspace.h>
+#endif
 
 /* Source is from the InvenSense MotionApps v2 demo code. Original source is
  * unavailable, unless you happen to be amazing as decompiling binary by

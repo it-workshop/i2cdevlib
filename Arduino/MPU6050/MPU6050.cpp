@@ -3144,10 +3144,10 @@ void MPU6050::setDMPConfig2(uint8_t config) {
 
 const unsigned char readByte(const unsigned char * reference)
 {
-    #ifdef _arch_avr_
+    #ifdef __AVR__
         return pgm_read_byte(reference);
     #endif
-    #ifdef _arch_arm_
+    #ifdef __arm__
         return *reference;
     #endif
 }
