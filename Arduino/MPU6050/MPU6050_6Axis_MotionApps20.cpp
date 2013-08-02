@@ -40,7 +40,9 @@ THE SOFTWARE.
 #include "MPU6050.h"
 
 #ifdef __AVR__
-#include <avr/pgmspace.h>
+    #include <avr/pgmspace.h>
+#else
+    #define PROGMEM
 #endif
 
 #define MPU6050_DMP_ACCEL_LSB_PER_G 16384   // lsb per g (?)
@@ -391,11 +393,11 @@ uint8_t MPU6050::dmpInitialize() {
             DEBUG_PRINTLN(F("Writing final memory update 1/7 (function unknown)..."));
             uint8_t dmpUpdate[16], j;
             uint16_t pos = 0;
-            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = pgm_read_byte(&dmpUpdates[pos]);
+            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = readByte(&dmpUpdates[pos]);
             writeMemoryBlock(dmpUpdate + 3, dmpUpdate[2], dmpUpdate[0], dmpUpdate[1]);
 
             DEBUG_PRINTLN(F("Writing final memory update 2/7 (function unknown)..."));
-            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = pgm_read_byte(&dmpUpdates[pos]);
+            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = readByte(&dmpUpdates[pos]);
             writeMemoryBlock(dmpUpdate + 3, dmpUpdate[2], dmpUpdate[0], dmpUpdate[1]);
 
             DEBUG_PRINTLN(F("Resetting FIFO..."));
@@ -434,15 +436,15 @@ uint8_t MPU6050::dmpInitialize() {
             resetDMP();
 
             DEBUG_PRINTLN(F("Writing final memory update 3/7 (function unknown)..."));
-            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = pgm_read_byte(&dmpUpdates[pos]);
+            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = readByte(&dmpUpdates[pos]);
             writeMemoryBlock(dmpUpdate + 3, dmpUpdate[2], dmpUpdate[0], dmpUpdate[1]);
 
             DEBUG_PRINTLN(F("Writing final memory update 4/7 (function unknown)..."));
-            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = pgm_read_byte(&dmpUpdates[pos]);
+            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = readByte(&dmpUpdates[pos]);
             writeMemoryBlock(dmpUpdate + 3, dmpUpdate[2], dmpUpdate[0], dmpUpdate[1]);
 
             DEBUG_PRINTLN(F("Writing final memory update 5/7 (function unknown)..."));
-            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = pgm_read_byte(&dmpUpdates[pos]);
+            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = readByte(&dmpUpdates[pos]);
             writeMemoryBlock(dmpUpdate + 3, dmpUpdate[2], dmpUpdate[0], dmpUpdate[1]);
 
             DEBUG_PRINTLN(F("Waiting for FIFO count > 2..."));
@@ -460,7 +462,7 @@ uint8_t MPU6050::dmpInitialize() {
             DEBUG_PRINTLNF(mpuIntStatus, HEX);
 
             DEBUG_PRINTLN(F("Reading final memory update 6/7 (function unknown)..."));
-            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = pgm_read_byte(&dmpUpdates[pos]);
+            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = readByte(&dmpUpdates[pos]);
             readMemoryBlock(dmpUpdate + 3, dmpUpdate[2], dmpUpdate[0], dmpUpdate[1]);
 
             DEBUG_PRINTLN(F("Waiting for FIFO count > 2..."));
@@ -479,7 +481,7 @@ uint8_t MPU6050::dmpInitialize() {
             DEBUG_PRINTLNF(mpuIntStatus, HEX);
 
             DEBUG_PRINTLN(F("Writing final memory update 7/7 (function unknown)..."));
-            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = pgm_read_byte(&dmpUpdates[pos]);
+            for (j = 0; j < 4 || j < dmpUpdate[2] + 3; j++, pos++) dmpUpdate[j] = readByte(&dmpUpdates[pos]);
             writeMemoryBlock(dmpUpdate + 3, dmpUpdate[2], dmpUpdate[0], dmpUpdate[1]);
 
             DEBUG_PRINTLN(F("DMP is good to go! Finally."));

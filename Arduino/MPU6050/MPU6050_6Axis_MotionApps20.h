@@ -41,7 +41,9 @@ THE SOFTWARE.
 
 #include "MPU6050.h"
 #ifdef __AVR__
-#include <avr/pgmspace.h>
+    #include <avr/pgmspace.h>
+#else
+    #define PROGMEM
 #endif
 
 /* Source is from the InvenSense MotionApps v2 demo code. Original source is
