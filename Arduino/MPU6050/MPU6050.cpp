@@ -2985,7 +2985,7 @@ bool MPU6050::writeMemoryBlock(const uint8_t *data, uint16_t dataSize, uint8_t b
         
         if (useProgMem) {
             // write the chunk of data as specified
-            for (j = 0; j < chunkSize; j++) progBuffer[j] = pgm_read_byte(data + i + j);
+            for (j = 0; j < chunkSize; j++) progBuffer[j] = readByte(data + i + j);
         } else {
             // write the chunk of data as specified
             progBuffer = (uint8_t *)data + i;
@@ -3054,9 +3054,9 @@ bool MPU6050::writeDMPConfigurationSet(const uint8_t *data, uint16_t dataSize, b
     uint8_t bank, offset, length;
     for (i = 0; i < dataSize;) {
         if (useProgMem) {
-            bank = pgm_read_byte(data + i++);
-            offset = pgm_read_byte(data + i++);
-            length = pgm_read_byte(data + i++);
+            bank = readByte(data + i++);
+            offset = readByte(data + i++);
+            length = readByte(data + i++);
         } else {
             bank = data[i++];
             offset = data[i++];
@@ -3074,7 +3074,7 @@ bool MPU6050::writeDMPConfigurationSet(const uint8_t *data, uint16_t dataSize, b
             Serial.println(length);*/
             if (useProgMem) {
                 if (sizeof(progBuffer) < length) progBuffer = (uint8_t *)realloc(progBuffer, length);
-                for (j = 0; j < length; j++) progBuffer[j] = pgm_read_byte(data + i + j);
+                for (j = 0; j < length; j++) progBuffer[j] = readByte(data + i + j);
             } else {
                 progBuffer = (uint8_t *)data + i;
             }
@@ -3087,7 +3087,7 @@ bool MPU6050::writeDMPConfigurationSet(const uint8_t *data, uint16_t dataSize, b
             // behavior only, and exactly why (or even whether) it has to be here
             // is anybody's guess for now.
             if (useProgMem) {
-                special = pgm_read_byte(data + i++);
+                special = readByte(data + i++);
             } else {
                 special = data[i++];
             }
@@ -3139,4 +3139,15 @@ uint8_t MPU6050::getDMPConfig2() {
 }
 void MPU6050::setDMPConfig2(uint8_t config) {
     I2Cdev::writeByte(devAddr, MPU6050_RA_DMP_CFG_2, config);
+}
+
+
+const unsigned char readByte(const unsigned char * reference)
+{
+    #ifdef _arch_avr_
+        return pgm_read_byte(reference);
+    #endif
+    #ifdef _arch_arm_
+        return *reference;
+    #endif
 }

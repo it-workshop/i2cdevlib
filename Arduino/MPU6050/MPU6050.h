@@ -38,9 +38,11 @@ THE SOFTWARE.
 #define _MPU6050_H_
 
 #include "I2Cdev.h"
-#include <avr/pgmspace.h>
 #include "helper_3dmath.h"
 
+#ifdef _arch_avr_
+    #include <avr/pgmspace.h>
+#endif
 
 #define MPU6050_INCLUDE_DMP_MOTIONAPPS20
 
@@ -986,5 +988,7 @@ class MPU6050 {
         uint8_t devAddr;
         uint8_t buffer[14];
 };
+
+const unsigned char readByte(const unsigned char *);
 
 #endif /* _MPU6050_H_ */
