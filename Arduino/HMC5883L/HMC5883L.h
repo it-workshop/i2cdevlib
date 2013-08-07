@@ -126,6 +126,12 @@ class HMC5883L {
 
         // DATA* registers
         void getHeading(int16_t *x, int16_t *y, int16_t *z);
+
+        // getHeading and then some magick.
+        // first 3 are temporary
+        void getHeadingCorrected(int16_t *x1, int16_t *y1, int16_t *z1,
+            double *x, double *y, double *z);
+
         int16_t getHeadingX();
         int16_t getHeadingY();
         int16_t getHeadingZ();

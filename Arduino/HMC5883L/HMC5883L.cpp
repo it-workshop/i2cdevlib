@@ -274,6 +274,20 @@ void HMC5883L::getHeading(int16_t *x, int16_t *y, int16_t *z) {
     *y = (((int16_t)buffer[4]) << 8) | buffer[5];
     *z = (((int16_t)buffer[2]) << 8) | buffer[3];
 }
+
+/** Get corrected raw data
+ */
+void HMC5883L::getHeadingCorrected(int16_t *x1, int16_t *y1, int16_t *z1,
+    double *x, double *y, double *z)
+{
+    getHeading(x1, y1, z1);
+
+    // magic constants
+    *x = 0.00153 * (*x1 - 35.7);
+    *y = 0.00156 * (*y1 + 126.87);
+    *z = 0.00177 * (*z1 - 12.5656);
+}
+
 /** Get X-axis heading measurement.
  * @return 16-bit signed integer with X-axis heading
  * @see HMC5883L_RA_DATAX_H
