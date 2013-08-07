@@ -283,9 +283,12 @@ void HMC5883L::getHeadingCorrected(int16_t *x1, int16_t *y1, int16_t *z1,
     getHeading(x1, y1, z1);
 
     // magic constants
-    *x = 0.00153 * (*x1 - 35.7);
-    *y = 0.00156 * (*y1 + 126.87);
-    *z = 0.00177 * (*z1 - 12.5656);
+    *x = magicA * (*x1 - magicX0);
+    *y = magicB * (*y1 + magicY0);
+    *z = magicC * (*z1 - magicZ0);
+//    *x = 0.00153 * (*x1 - 35.7);
+//    *y = 0.00156 * (*y1 + 126.87);
+//    *z = 0.00177 * (*z1 - 12.5656);
 }
 
 /** Get X-axis heading measurement.

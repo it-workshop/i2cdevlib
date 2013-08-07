@@ -100,6 +100,17 @@ THE SOFTWARE.
 #define HMC5883L_STATUS_LOCK_BIT    1
 #define HMC5883L_STATUS_READY_BIT   0
 
+//0.0015208469,  0.0015429864,  0.0017002154,  26.323509, -30.820171,
+//65.518315
+
+#define magicA 0.0015208469
+#define magicB 0.0015429864
+#define magicC 0.0017002154
+
+#define magicX0 26.323509
+#define magicY0 -30.820171
+#define magicZ0 65.518315
+
 class HMC5883L {
     public:
         HMC5883L();
