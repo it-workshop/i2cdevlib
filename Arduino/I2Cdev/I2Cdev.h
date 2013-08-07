@@ -65,6 +65,8 @@ THE SOFTWARE.
 // -----------------------------------------------------------------------------
 #define I2CDEV_IMPLEMENTATION       I2CDEV_ARDUINO_WIRE
 
+#define I2CDEV_ARDUINO_WIRE_PORT    Wire
+
 // -----------------------------------------------------------------------------
 // Arduino-style "Serial.print" debug constant (uncomment to enable)
 // -----------------------------------------------------------------------------
