@@ -111,6 +111,9 @@ THE SOFTWARE.
 #define magicY0 -30.820171
 #define magicZ0 65.518315
 
+// multiplies z data by -1 in getHeadingCorrected
+#define ZAxisInvert 1
+
 class HMC5883L {
     public:
         HMC5883L();
