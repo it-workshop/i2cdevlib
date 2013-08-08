@@ -103,6 +103,14 @@ THE SOFTWARE.
 //0.0015208469,  0.0015429864,  0.0017002154,  26.323509, -30.820171,
 //65.518315
 
+//#define magicA 0.001
+//#define magicB 0.001
+//#define magicC 0.001
+
+//#define magicX0 0
+//#define magicY0 0
+//#define magicZ0 0
+
 #define magicA 0.0015208469
 #define magicB 0.0015429864
 #define magicC 0.0017002154
@@ -112,7 +120,7 @@ THE SOFTWARE.
 #define magicZ0 65.518315
 
 // multiplies z data by -1 in getHeadingCorrected
-#define ZAxisInvert 1
+//#define ZAxisInvert 1
 
 class HMC5883L {
     public:

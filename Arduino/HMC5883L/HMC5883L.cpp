@@ -284,7 +284,7 @@ void HMC5883L::getHeadingCorrected(int16_t *x1, int16_t *y1, int16_t *z1,
 
     // magic constants
     *x = magicA * (*x1 - magicX0);
-    *y = magicB * (*y1 + magicY0);
+    *y = magicB * (*y1 - magicY0);
     *z = magicC * (*z1 - magicZ0);
 
 #ifdef ZAxisInvert
